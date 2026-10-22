@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-ghardn-red: #E20916;
+    --color-ghardn-dark: #262626;
+    --color-ghardn-charcoal: #302B28;
+    --color-ghardn-light: #F5F5F5;
+  }
+
+  html {
+    color-scheme: dark;
+    font-family: 'Montserrat', sans-serif;
+    scroll-snap-type: y proximity;
+    scroll-padding-top: 80px;
+  }
+
+  body {
+    background-color: #161616;
+    color: #F5F5F5;
+    overflow-x: hidden;
+  }
+
+  /* Custom luxury scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #1A1A1A;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #E20916;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #FF1A27;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    background: rgba(38, 38, 38, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-card {
+    background: rgba(30, 30, 30, 0.80);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .glass-red {
+    background: rgba(226, 9, 22, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(226, 9, 22, 0.4);
+  }
+
+  .text-glow-red {
+    text-shadow: 0 0 20px rgba(226, 9, 22, 0.6);
+  }
+
+  .text-shadow-hero {
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.85);
+  }
+
+  .gradient-overlay {
+    background: linear-gradient(180deg, rgba(22, 22, 22, 0.6) 0%, rgba(22, 22, 22, 0.2) 40%, rgba(22, 22, 22, 0.85) 100%);
+  }
+
+  .gradient-overlay-bottom {
+    background: linear-gradient(0deg, #161616 0%, rgba(22, 22, 22, 0.8) 50%, rgba(22, 22, 22, 0) 100%);
+  }
+}
+
+@keyframes ping-slow {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.8);
+    opacity: 0.2;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+.animate-ping-slow {
+  animation: ping-slow 2.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}

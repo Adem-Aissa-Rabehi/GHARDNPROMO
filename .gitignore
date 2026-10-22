@@ -1,0 +1,54 @@
+# ============================================
+# Git Ignore - GHARDN PROM
+# ============================================
+
+# Dépendances Node & Python
+node_modules/
+venv/
+.venv/
+env/
+ENV/
+
+# Builds et Archives
+dist/
+dist.zip
+*.zip
+deploy_cpanel/
+scratch/
+
+# Cache Python & Django
+__pycache__/
+*.py[cod]
+*$py.class
+*.sqlite3-journal
+
+# Fichiers temporaires ou logs
+*.log
+prompt.txt
+
+# Dossier média dupliqué à la racine (conservé uniquement dans backend/media)
+/media/
+
+# Fichiers de conception / maquettes brutes à la racine
+*.ai
+*.pdf
+*.mp4
+Arranging_*.jpg
+Modify_*.jpg
+F3 Centre/
+F3 sud/
+F4/
+cummun/
+forms/
+hall/
+plan fini/
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+charte_graphique_ghardn_prom.md
+DEPLOYMENT_CPANEL_GUIDE.md
+DEPLOYMENT_GUIDE_V2_FINAL.md
+svg/

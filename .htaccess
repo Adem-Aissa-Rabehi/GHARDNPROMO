@@ -1,0 +1,66 @@
+# ========================================================
+# GHARDN PROM - Configuration Apache .htaccess pour cPanel
+# Domaine : http://ch.ghardnprom.com / https://ch.ghardnprom.com
+# Dossier : /ch.ghardnprom.com
+# ========================================================
+
+DirectoryIndex index.html
+
+# Activer l'affichage des erreurs détaillées Passenger
+<IfModule mod_passenger.c>
+  PassengerFriendlyErrorPages on
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 1. Ne pas toucher aux requêtes destinées à l'API Django ou Passenger
+  RewriteCond %{REQUEST_URI} ^/api/ [OR]
+  RewriteCond %{REQUEST_URI} ^/django-admin/ [OR]
+  RewriteCond %{REQUEST_URI} ^/passenger_wsgi.py
+  RewriteRule ^ - [L]
+
+  # 2. Si le fichier physique ou dossier demandé existe (fichiers JS, CSS, images, /media/...), le servir directement
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # 3. Fallback média si le dossier est dans backend/media/
+  RewriteRule ^media/(.*)$ backend/media/$1 [L]
+
+  # 4. Routage SPA (Single Page Application) : Rediriger toutes les autres routes (ex: /admin) vers index.html
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# --- TYPES MIME POUR LES MÉDIAS MODERNES ET VIDÉOS ---
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+  AddType image/svg+xml .svg .svgz
+  AddType video/mp4 .mp4 .m4v
+  AddType video/webm .webm
+  AddType video/ogg .ogv
+  AddType video/quicktime .mov
+  AddType application/font-woff2 .woff2
+  AddType application/font-woff .woff
+</IfModule>
+
+# --- EN-TÊTES DE MISE EN CACHE ET PERFORMANCE ---
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 month"
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType video/mp4 "access plus 1 year"
+  ExpiresByType video/webm "access plus 1 year"
+</IfModule>
+
+# --- COMPRESSION GZIP / DEFLATE ---
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json image/svg+xml
+</IfModule>
